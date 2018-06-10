@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>绝对定位与整体页面布局</title>
+        <style>
+            * {
+                margin: 0;
+            }/*重置所有margin为0，这一步极其重要，否则布局必乱。*/
+
+            html,body,.page {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .page {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: #ccc;
+            }
+
+            .header {
+                position: absolute;
+                height: 50px;
+                left: 0;
+                right: 0;
+                background-color: purple;
+                padding: 0 5px;
+                z-index: 1;
+            }
+
+            .header>h1 {
+                line-height: 50px;
+                text-align: center;
+            }
+
+            .aside {
+                position: absolute;
+                top: 50px;
+                bottom: 50px;
+                left: 0;
+                width: 100px;
+                background-color: orange;
+            }
+
+            .footer {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                height: 50px;
+                background-color: purple;
+            }
+
+            .footer>h1 {
+                text-align: center;
+                line-height: 50px;
+            }
+
+            .content {
+                position: absolute;
+                top: 50px;
+                right: 0;
+                bottom: 50px;
+                left: 100px;
+                background-color: cyan;
+                overflow: auto;
+            }
+
+            .content h1 {
+                margin-top: 100px;
+                margin-left: 50px;
+            }
+
+            .content li {
+                margin-left: 100px;
+                margin-top: 80px;
+                font-size: 24px;
+                line-height: 1.5;
+            }
+
+            ol {
+                margin-bottom: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <div class="header">
+                <h1>Header</h1>
+            </div>
+            <div class="aside">
+                <h1>Aside</h1>
+            </div>
+            <div class="content">
+                <h1>实现原理</h1>
+                <ol>
+                    <li>创建一个div.page，绝对定位，铺满全屏。</li>
+                    <li>创建一个div.header，绝对定位，设定高度。</li>
+                    <li>创建一个div.aside，绝对定位，设定宽度。</li>
+                    <li>创建一个div.footer，绝对定位，设定高度。</li>
+                    <li>创建一个div.content，绝对定位，根据周围div的宽高设定它的宽高；<br />
+                    以div.content元素取代原body元素，所有的页面内容都放在这里面。</li>
+                </ol>
+            </div>
+            <div class="footer">
+                <h1>Footer</h1>
+            </div>
+        </div>
+    </body>
+</html>

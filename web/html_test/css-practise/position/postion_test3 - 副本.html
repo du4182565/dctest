@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>relative对absolute的限制2</title>
+        <style>
+            .box {
+                width:500px;
+                height: 350px;
+                line-height: 350px;
+                background-color: pink;
+                margin:50px auto 50px;
+                overflow: hidden; 
+                text-align: center;               
+            }
+
+            .box p {
+                display: inline-block;
+                vertical-align: middle;
+                width:300px;
+                font-size: 16px;
+                line-height: 2;
+                text-align: left;
+            }
+
+            p.middle {
+                width: 500px;
+                margin: 0 auto;
+            }
+
+            .box img {
+                border: 1px solid black;
+                vertical-align: middle;
+                transition:margin-left 2s,margin-top 2s;
+            }
+
+            .box img:active {
+                position: absolute;
+                margin-left:-120px;
+                margin-top: -45px;
+            }
+
+            .box2 {
+                position: relative;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="box box1">
+            <img src="http://imgsrc.baidu.com/forum/w%3D580/sign=0c101fe665380cd7e61ea2e59145ad14/f9a3492762d0f7032de1758a08fa513d2797c542.jpg" alt="A picture" style="width:100px;height:150px" />
+            <p>今天，absolute小朋友出去玩啦。<br />
+            鉴于上次用top、right、bottom、left技能的时候遇到了relative，导致出不去的尴尬，今天用的是margin负值技能。<br />
+            虽然房子周围设置了overflow:hidden，但这位强大的小朋友依然跑出去啦。</p>
+        </div>
+        <p class="middle">友情提示，请鼠标点击absolute小伙伴，看看会发生什么。。。</p>
+        <div class="box box2">
+            <img src="http://imgsrc.baidu.com/forum/w%3D580/sign=0c101fe665380cd7e61ea2e59145ad14/f9a3492762d0f7032de1758a08fa513d2797c542.jpg" alt="A picture" style="width:100px;height:150px" />
+            <p>今天，absolute小朋友又出去玩啦，同样用的是margin负值技能。<br />
+            房子周围也是设置了overflow:hidden属性的，但是这位强大的小朋友依然跑出去啦。<br />
+            咦，什么情况，我房子外边的那部分身体呢？<br />
+            我擦嘞，relative你什么时候来的？</p>
+        </div>
+    </body>
+</html>

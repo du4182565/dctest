@@ -1,0 +1,44 @@
+#example {
+				float: right;
+			}
+
+			#example p {
+				margin: 0 0.25em;
+				padding: 0.25em 0;
+			}
+			#div-before,
+			#div-after {
+				background-color: #88d;
+				color: #000;
+			}
+
+			#div-1 {
+				position:relative;
+				width: 400px;
+				background-color: #000;
+				color: #fff;
+			}
+
+			#div-1-padding {
+				padding: 10px;
+			}
+
+			#div-1a {
+				position:absolute;
+				top:0;
+				right:0;
+				width:200px;
+				background-color: #d33;
+				color: #fff;
+			}
+
+			#div-1b {
+				float: right;
+				background-color: #3d3;
+				color: #fff;
+			}
+
+			#div-1c {
+				background-color: #33d;
+				color: #fff;
+			}

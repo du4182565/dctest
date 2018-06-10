@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>yuanxinglian</title>
+</head>
+<body>
+	<script>
+	function Student(name){
+		this.name = name;
+	}
+
+	function Student1(name){
+		this.name = name;
+	}
+
+	Student.prototype.hello = function(){
+		alert("hello" + this.name);
+	}
+
+	var xiaoming = new Student('xiaoming');
+	console.log(Student.prototype === xiaoming.__proto__);
+	</script>
+</body>
+</html>

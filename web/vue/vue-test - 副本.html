@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .clr { background-color:pink; }
+    .oneStyle { color:blue; font-size: 33px;}
+    .twoStyle { font-size: 33px;}
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <div class="test" v-bind:class='my'>对象设置类名</div>
+  <div class="test" v-bind:class='[one,two]'>数组设置类名</div>
+  <div class="test" v-bind:class='[one,two,{clr:isClr}]'>对象和数组设置类名</div>
+</div>
+
+<script src="vue.min.js"></script>
+<script>
+
+  var vm = new Vue({
+    el:'#app',
+    data:{
+      biaoti:'这是一个标题',
+      mytitle:'我的自定义属性',
+      isClr:true,
+      one:'oneStyle',
+      two:'twoStyle',
+	  my:'clr'
+    }
+  })
+
+
+</script>
+
+</body>
+</html>

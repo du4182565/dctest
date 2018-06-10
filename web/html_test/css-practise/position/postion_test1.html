@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>绝对定位的特征</title>
+        <style>
+            .box1,.box2,.box3 {
+                background-color: orange;
+                margin-bottom: 30px;
+            }
+
+            .absolute {
+                position: absolute;
+            }
+
+            .wraper {
+                display:inline-block;
+                margin-left: 300px;
+            }
+
+            .float {
+                float: left;
+            }
+            
+            .box3 {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box1">
+            <img src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+            <img src="http://pic1.win4000.com/wallpaper/c/537b28b60619b.jpg" alt="A picture" style="width:240px;height:180px" />
+            <p>这是普通流中的两幅图像。</p>
+        </div>
+        <div class="box2">
+            <img class="absolute" src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+            <img src="http://pic1.win4000.com/wallpaper/c/537b28b60619b.jpg" alt="A picture" style="width:240px;height:180px" />
+
+            <div class="wraper">
+                <img class="float" src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+                <img src="http://pic1.win4000.com/wallpaper/c/537b28b60619b.jpg" alt="A picture" style="width:240px;height:180px" />
+            </div>
+            <p>左图，将第一幅图像绝对定位，其完全脱离文档流，并且覆盖在第二幅图像之上；由此看出，绝对定位的破坏性不仅让元素没有了高度，甚至没有了宽度。</p>
+            <p>右图，将第一幅图像左浮动，其虽然脱离了文档流，但是并没有覆盖在其他元素之上；浮动的破坏性仅仅破坏了元素的高度，而保留了元素的宽度。</p>
+        </div>
+        <div class="box3">
+            <img src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+            <img src="http://pic1.win4000.com/wallpaper/c/537b28b60619b.jpg" alt="A picture" style="width:240px;height:180px" />
+            <p>将容器绝对定位，体现其包裹性。</p>
+        </div>
+    </body>
+</html>

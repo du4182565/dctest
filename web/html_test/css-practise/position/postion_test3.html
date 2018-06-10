@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>用margin调整绝对定位元素的位置</title>
+        <style>
+            .box1,.box2,.box3 {
+                display: inline-block;
+                margin-right: 0px;
+                border:1px solid blue;
+            }
+    
+            span {
+                background-color: red;
+            }
+    
+            .box2 span,.box3 span {
+                position: absolute;
+            }
+    
+            .meng {
+                margin-left: -3em;
+            }
+    
+            .box4 {
+                border:1px solid red;
+                width: 500px;
+                margin: 50px auto 0 auto;
+                padding:20px;
+            }
+
+            li {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box1">
+            <span>卡哇伊</span>
+            <img src="http://imgsrc.baidu.com/forum/w%3D580/sign=0c101fe665380cd7e61ea2e59145ad14/f9a3492762d0f7032de1758a08fa513d2797c542.jpg" style="width:200px;height:300px" />
+            <span>萌萌哒</span>
+        </div>
+        <div class="box2">
+            <span>卡哇伊</span>
+            <img src="http://imgsrc.baidu.com/forum/w%3D580/sign=0c101fe665380cd7e61ea2e59145ad14/f9a3492762d0f7032de1758a08fa513d2797c542.jpg" style="width:200px;height:300px" />
+            <span>萌萌哒</span>
+            </div>    
+        <div class="box3">
+            <span>卡哇伊</span>
+            <img src="http://imgsrc.baidu.com/forum/w%3D580/sign=0c101fe665380cd7e61ea2e59145ad14/f9a3492762d0f7032de1758a08fa513d2797c542.jpg" style="width:200px;height:300px" />
+            <span class="meng">萌萌哒</span>
+        </div>    
+        <div class="box4">
+            <ol>
+                <li>第一幅图，最开始的样子。</li>
+                <li>第二幅图，两个标签绝对定位，但是不指定任何偏移量。</li>
+                <li>第三幅图，用margin负值调整“萌萌哒”的位置，完成。</li>
+            </ol>
+        </div>        
+    </body>
+</html>

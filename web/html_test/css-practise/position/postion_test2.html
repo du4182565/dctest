@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>绝对定位的一般规则</title>
+        <style>
+            body {
+                background-color: #ccc;
+            }
+            .container {
+                width:500px;
+                background-color: orange;
+                margin:20px auto 50px auto;
+                padding:20px;
+                border:2px solid red;
+            }
+
+            .box2 img,.box3 img,
+            .box4 img,.box5 img {
+                position: absolute;
+            }
+
+            .box3 img,.box4 img {
+                left:0;
+                bottom:0;
+            }
+
+            .box5 img {
+                left: -30px;
+                bottom: -50px;
+            }
+
+            .block {
+                position :relative;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="box1">
+                <p>元素绝对定位时，会完全脱离文档流，并相对于其包含块定位。绝对定位的包含块，是其最近的已定位的祖先元素。</p>
+                <img src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+                <ul>
+                    <li>如果这个祖先元素是块级元素，包含块则为该祖先元素的内边距边界，即边框。</li>
+                    <li>如果这个祖先元素是行内元素，包含块则为该祖先元素的内容边界，即内容区。</li>
+                    <li>如果没有已定位的祖先元素，元素的包含块定义为初始包含块（一个视窗大小的矩形）。</li>      
+                </ul>
+            </div><!--关闭box1-->
+        </div><!--关闭container-->
+        <div class="container">
+            <div class="box2">
+            <p>不管有没有已经定位的祖先元素，只要没有偏移量，绝对定位之后，原地不动，脱离文档流。</p>
+            <p>下面这个已经绝对定位的图像原地没动，但是已经脱离了文档流。</p>
+            <img src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+            </div><!--关闭box2-->
+        </div><!--关闭container-->
+        <div class="container">
+            <div class="box3">
+                <p>没有已经定位的祖先元素，有偏移量，绝对定位之后，以初始包含块（一个视窗大小的矩形）为基准进行偏移。</p>
+                <p>当偏移量为left:0; buttom:0时，图像水平偏移到了初始包含块左下角（打开网页最开始的那一个视窗的左下角）。</p>
+                <img src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+            </div><!--关闭box3-->
+        </div><!--关闭container-->
+        <div class="container block">
+            <div class="box4">
+                <p>有已经定位的祖先元素，有偏移量，绝对定位之后，以已经定位的祖先元素为基准进行偏移。</p>
+                <p>此处已经定位的祖先元素为这个图像的容器div元素，偏移量为left:0; bottom:0时，图像到了这个容器的左下角（以边框为界）。</p>
+                <img src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+            </div><!--关闭box4-->
+        </div><!--关闭container-->
+        <div class="container block">
+            <div class="box5">
+                <p>有已经定位的祖先元素，有偏移量，绝对定位之后，以已经定位的祖先元素为基准进行偏移。</p>
+                <p>此处已经定位的祖先元素为这个图像的容器div元素，偏移量为left:-30px; bottom:-50px时，图像到了这个容器之外（以边框为界）。</p>
+                <img src="http://a.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fa38bfc55a964034f79f019ec.jpg" alt="A picture" style="width:175px;height:100px" />
+            </div><!--关闭box5-->
+        </div><!--关闭container-->
+    </body>    
+</html>
