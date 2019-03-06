@@ -1,0 +1,130 @@
+VERSION=alpha19_018
+BASEDIR ?= ../../../
+C_ARGS_ORG = -Wall -g -DTHIS_VERSION=\"$(VERSION)\"
+C_ARGS = $(C_ARGS_ORG)
+ 
+#ifeq ($(PARA_DEBUG),false)
+#C_ARGS = $(C_ARGS_ORG)
+#else
+#C_ARGS = $(C_ARGS_ORG) -D_DEBUG
+#endif
+ 
+ 
+#定义这个这个选项为心跳消息 (ACE！)
+#DEFINE_HEARTBEAT = BOYAA_ACE_HAS_HEARTBEAT
+ifeq ($(DEFINE_HEARTBEAT), BOYAA_ACE_HAS_HEARTBEAT)
+    #定义这个这个选项为代理服务器
+    #BY_PROXY_MEM_SERVER = _BY_PROXY_MEM_SERVER
+    ifeq ($(BY_PROXY_MEM_SERVER), _BY_PROXY_MEM_SERVER)
+        C_ARGS = -Wall -g -DBOYAA_ACE_HAS_HEARTBEAT -D_BY_PROXY_MEM_SERVER -DTHIS_VERSION=\"$(VERSION)\"
+        ACELIB_NAME = libbyacehashaetbeatproxy.a
+        LIB_BYACE = -L$(BASEDIR)/api/lib/ -lbyacehashaetbeatproxy
+    else
+        C_ARGS = -Wall -g -DBOYAA_ACE_HAS_HEARTBEAT -DTHIS_VERSION=\"$(VERSION)\"
+        ACELIB_NAME = libbyacehashaetbeat.a
+        LIB_BYACE = -L$(BASEDIR)/api/lib/ -lbyacehashaetbeat
+    endif
+else
+    #定义这个这个选项为代理服务器
+    #BY_PROXY_MEM_SERVER = _BY_PROXY_MEM_SERVER
+    ifeq ($(BY_PROXY_MEM_SERVER), _BY_PROXY_MEM_SERVER)
+        C_ARGS = -Wall -g -D_BY_PROXY_MEM_SERVER -DTHIS_VERSION=\"$(VERSION)\"
+        ACELIB_NAME = libbyaceproxy.a
+        LIB_BYACE = -L$(BASEDIR)/api/lib/ -lbyaceproxy
+    else
+        C_ARGS = -Wall -g -DTHIS_VERSION=\"$(VERSION)\"
+        ACELIB_NAME = libbyace.a
+        LIB_BYACE = -L$(BASEDIR)/api/lib/ -lbyace
+    endif
+endif
+ 
+ 
+#如果是代理框架用的
+ifeq ($(BOYAA_PROXY_FRAME), _BY_BOYAA_PROXY_FRAME)
+    CFLAGS = $(OPT) -g -pg -Wall -D_GNU_SOURCE -DBOYAA_PROXY_FRAME -funroll-loops -MMD -D_REENTRANT
+    PROXYLIB_NAME = libbyproxyFrame.a
+    LIB_BYPROXY = -L$(BASEDIR)/api/lib/ -lbyproxyFrame
+else
+    #PROXY_DEFINE_HEARTBEAT = BOYAA_PROXY_HAS_HEARTBEAT
+    ifeq ($(PROXY_DEFINE_HEARTBEAT), BOYAA_PROXY_HAS_HEARTBEAT)
+        #BY_PROXY_HOT_RECODE_H_N = _BY_PROXY_NOT_RECODE_H_N
+        ifeq ($(BY_PROXY_HOT_RECODE_H_N), _BY_PROXY_NOT_RECODE_H_N)
+            #有心跳,没有字节序转换
+            CFLAGS = $(OPT) -g -DBOYAA_PROXY_HAS_HEARTBEAT -DPROXY_NOT_RECODE_H_N -pg -Wall -D_GNU_SOURCE -funroll-loops -MMD -D_REENTRANT
+            PROXYLIB_NAME = libbyproxyhaetbeat.a
+            LIB_BYPROXY = -L$(BASEDIR)/api/lib/ -lbyproxyhaetbeat
+        else
+            #既有字节序转换也有心跳
+            CFLAGS = $(OPT) -g -DBOYAA_PROXY_HAS_HEARTBEAT -pg -Wall -D_GNU_SOURCE -funroll-loops -MMD -D_REENTRANT
+            PROXYLIB_NAME = libbyproxyhaetbeathn.a
+            LIB_BYPROXY = -L$(BASEDIR)/api/lib/ -lbyproxyhaetbeathn
+        endif
+    else
+        #BY_PROXY_HOT_RECODE_H_N = _BY_PROXY_NOT_RECODE_H_N
+        ifeq ($(BY_PROXY_HOT_RECODE_H_N), _BY_PROXY_NOT_RECODE_H_N)
+            #没有字节序转换,没有心跳
+            CFLAGS = $(OPT) -g -DPROXY_NOT_RECODE_H_N -pg -Wall -D_GNU_SOURCE -funroll-loops -MMD -D_REENTRANT
+            PROXYLIB_NAME = libbyproxy.a
+            LIB_BYPROXY = -L$(BASEDIR)/api/lib/ -lbyproxy
+        else
+            #字节序转换,没有心跳
+            CFLAGS = $(OPT) -g -pg -Wall -D_GNU_SOURCE -funroll-loops -MMD -D_REENTRANT
+            PROXYLIB_NAME = libbyproxyhn.a
+            LIB_BYPROXY = -L$(BASEDIR)/api/lib/ -lbyproxyhn
+        endif
+    endif
+endif
+ 
+ 
+ 
+ 
+INC_CTLIB = -I$(BASEDIR)/ctlib/include/
+#INC_APP  = -I$(BASEDIR)/appctrl/include/
+#INC_APP_PROTO = -I$(BASEDIR)/protoc/include/
+#INC_APP_COMM  = -I$(BASEDIR)/comm/
+#INC_API  = -I$(BASEDIR)/api/include/
+ 
+INC_WORDCHECK = -I$(BASEDIR)/wordcheck/include/
+ 
+ 
+LIB_CTLIB = -L$(BASEDIR)/api/lib/ -lct
+#LIB_APP = -L$(BASEDIR)/appctrl/lib/ -lappctrl
+ 
+#LIB_APP_PROTO = -L$(BASEDIR)/protoc/lib/ -lappprotoc
+ 
+ 
+#In boyya add
+#INC        = -I. -I$(CORE_HOME) -I ./Json
+#LINK       = -lpthread -L$(RUN_LIB_HOME) -Wl,-rpath=$(RUN_LIB_HOME) -lcore -lz  -z defs  /usr/local/lib/libhiredis.a
+#OPT         = -pipe -fno-ident -fPIC
+ 
+INC_MEMCACHED=-I /usr/local/libmemcached/include/
+LIB_MEMCACHED=-L/usr/local/libmemcached/lib/ -lmemcached
+ 
+INC_BYCACH = -I$(BASEDIR)/bycachlib/include/
+LIB_BYCACH = -L$(BASEDIR)/api/lib/ -lbycach
+ 
+INC_HIREDIS = -I$(BASEDIR)/byhiredislib/
+LIB_HIREDIS = -L$(BASEDIR)/api/lib/ -lbyhiredis -lhiredis
+ 
+INC_BYPROXY = -I$(BASEDIR)/byproxylib/include/ -I$(BASEDIR)/byproxylib/include/core
+ 
+INC_BYGAME = -I$(BASEDIR)/bygamelib/include
+LIB_BYGAME = -L$(BASEDIR)/api/lib/ -lbygame
+ 
+INC_MYSQL = -I$(BASEDIR)/DB -I$(BASEDIR)/DB/mysql
+LIB_MYSQL = -L/usr/lib/mysql/ -lmysqlclient
+ 
+INC_APP_PROTO = -I$(BASEDIR)/protolib/include/
+LIB_APP_PROTO = -L$(BASEDIR)/api/lib/ -lappprotoc -L /usr/local/lib/ -lprotobuf
+ 
+INC_CLIENT = -I$(BASEDIR)/clientlib/include
+LIB_CLIENT = -L$(BASEDIR)/api/lib/ -lclient
+ 
+INC_WORDCHECK = -I$(BASEDIR)/wordcheck/include
+LIB_WORDCHECK = -L$(BASEDIR)/api/lib/ -lwordcheck
+ 
+INC_BYACE = -I$(BASEDIR)/byacelib/include/
+INC_COMM_LIB = -I$(BASEDIR)/commlib/ -I$(BASEDIR)/cmdcomm/
+LIB_COMM        = -L -lpthread -Wl -lz  -z defs
+OPT         = -pipe -fno-ident -fPIC
