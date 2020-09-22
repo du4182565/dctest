@@ -1,0 +1,52 @@
+Open segments:Microsoft (R) Macro Assembler Version 5.00                  9/5/19 14:48:51
+                                                             Page     1-1
+
+
+
+CODESG . . . . . . . . . . . . .  	
+Microsoft (R) Macro Assembler Version 5.00                  9/5/19 14:48:51
+                                                             Page     1-1
+
+
+       1				;pro4.1 
+       2				assume cs:codesg 
+       3				 
+       4 0000				codesg segment 
+       5 0000  B8 0123				mov ax,0123H 
+       6 0003  BB 0456				mov bx,0456H 
+       7 0006  03 C3				add ax,bx 
+       8 0008  03 C0				add ax,ax 
+       9					 
+      10 000A  B8 4C00				mov ax,4c00H 
+      11 000D  CD 21				int 21H 
+      12				 
+      13 000F				codesg segment 
+test1.ASM(13): error A2000: Block nesting error
+      14				end 
+Open segments:
+CODESG . . . . . . . . . . . . .  	
+Microsoft (R) Macro Assembler Version 5.00                  9/5/19 14:48:51
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODESG . . . . . . . . . . . . .  	000F	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+@FILENAME  . . . . . . . . . . .  	TEXT  test1		
+
+
+     14 Source  Lines
+     14 Total   Lines
+      3 Symbols
+
+  50710 + 465834 Bytes symbol space free
+
+      0 Warning Errors
+      2 Severe  Errors
