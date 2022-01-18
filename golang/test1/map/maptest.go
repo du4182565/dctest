@@ -5,6 +5,9 @@ import("fmt"
 )
 
 
+type Valw  map[string][]string
+
+
 func main(){
 	temp := map[string]string{
 		"vw":"dazhong",
@@ -23,4 +26,10 @@ func main(){
 	}
 	fmt.Println(reflect.TypeOf(git))
 	fmt.Println(temp)
+	var temp1 Valw
+	fmt.Println(temp1)
+	temp2 := Valw{
+		"dwq":{"dwq","ddq"},
+	}
+	_  = temp2
 }

@@ -14,5 +14,6 @@ func (t *T) GFG() {
   
 func main() { 
     var t T 
-    reflect.ValueOf(&t).MethodByName("GFG").Call([]reflect.Value{}) 
+ //   reflect.ValueOf(&t).MethodByName("GFG").Call([]reflect.Value{}) 
+    reflect.ValueOf(&t).MethodByName("GFG").Call(nil) 
 }
