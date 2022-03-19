@@ -1,4 +1,4 @@
-pakckage packtest
+package packtest
 
 
 import(

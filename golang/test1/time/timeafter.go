@@ -17,7 +17,6 @@ func main() {
 			select {
 			case <-c:
 				fmt.Println("channel sign")
-				return
 			case <-t1.C:      // 代码段2
 				fmt.Println("3s定时任务")
 			case <-timeout:   // 代码段1
@@ -32,7 +31,6 @@ func main() {
 		}
 	}()
 	time.Sleep(time.Second * 6)
-	close(c)
-	time.Sleep(time.Second * 2)
+	time.Sleep(time.Second * 12)
 	fmt.Println("main退出")
 }
