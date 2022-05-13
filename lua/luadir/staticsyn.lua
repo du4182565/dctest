@@ -336,18 +336,13 @@ if (gui_enabled()) then
 					w:append("4,探索wiresharklua接口，尝试操作过滤ip或端口实现。" .. "\n");
 					w:append("5,是否需要扩展终端命令实现批处理操作。" .. "\n");
 				end
-		end
-		
-		function startst()
-			retap_packets()
-		end
-		w:add_button("start",startst)
+		end		
 		w:add_button("readme",readme)
 		w:add_button("reload", function() reload_lua_plugins() end)
 		w:add_button("statistics",statistics)
 		w:add_button("packagedetail",packagedetail_show)
 		--w:add_button("filter", filter)
-		--retap_packets()
+		retap_packets()
 	end
 	register_menu("statistic/syntime", statisticsyntime, MENU_TOOLS_UNSORTED)
 end

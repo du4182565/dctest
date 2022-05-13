@@ -270,7 +270,7 @@ if (gui_enabled()) then
 			}
 			local i = 0
 			w:append("time" .. "\t" .. "syn1" .. "\t" ..  "syn2" .. "\t" .. "syn3".. "\t" .. "conn" .. "\t" .. "fin1" .. "\t" .. "fin2" .. "\t" .. "fin3" .. "\t" .. "fin4" .. "\t" .. "totalstream" .."\n");
-			w:append(type(pinfotimetmp) .. "\n")
+			
 			for i = 0, pinfotimetmp, 1 do
 				local v = timetable[i]
 				if v ~= nil then
@@ -301,15 +301,13 @@ if (gui_enabled()) then
 		end
 		
 		function statistics()
-			function tap.draw()
-				w:clear()
-				statistickdraw()
-			end
+			w:clear()
+			statistickdraw()
 		end
 		
 		function packagedetail_show()
 			w:clear()
-			function tap.draw()
+			function tap.draw(t)
 				w:clear()
 				w:append("本功能暂未实现。" .. "\n")
 				for k,v in pairs(reletable) do
@@ -319,35 +317,26 @@ if (gui_enabled()) then
 		end
 
 		function readme()
-				function tap.draw()
-					w:clear()
-					w:append("界面说明" .."\n");
-					w:append("time" .. "\t" .. "syn1" .. "\t" ..  "syn2" .. "\t" .. "syn3".. "\t" .. "conn" .. "\t" .. "fin1" .. "\t" .. "fin2" .. "\t" .. "fin3" .. "\t" .. "fin4" .. "\t" .. "totalstream" .."\n");
-					w:append("时间" .. "\t" .. "当前时间发生数据包/当前时间总包" .. "\t\t" ..  "conn列表示： 当前时间建立的会话/当前时间段总会话"  .."\n");
-					w:append("\t" .. "当前时间重复数据包/当前时间重复总包" .. "\t\t\t\t\t\t\t" .."\n");
-					w:append("\t" .. "当前时间总重复数据包/现存未响应数据包" ..  "conn列表示： -/当前时间点现存会话" .. "\t" .. "totalstream表示发生过的完整会话".."\n\n\n\n");
-					w:append("操作说明：" .."\n");
-					w:append("1，打开数据捕获器后启动本插件。在每一次统计后需关闭当前窗口（后期优化清零统计按钮）" .. "\n");
-					w:append("2, 如需重现统计可保存数据包，重新打开wireshark窗口再启动插件" .. "\n\n\n\n");
-					w:append("优化计划" .. "\n");
-					w:append("1,packagedetail按键下统计数据中ip和端口项。" .."\n");
-					w:append("2,clear按键清零统计项，使用数据包过滤器等重新过滤数据操作都需要清零。" .. "\n");
-					w:append("3,fin包后的ack暂未统计，实现统计" .. "\n");
-					w:append("4,探索wiresharklua接口，尝试操作过滤ip或端口实现。" .. "\n");
-					w:append("5,是否需要扩展终端命令实现批处理操作。" .. "\n");
-				end
-		end
-		
-		function startst()
-			retap_packets()
-		end
-		w:add_button("start",startst)
+				w:clear()
+				w:append("界面说明" .."\n");
+				w:append("time" .. "\t" .. "syn1" .. "\t" ..  "syn2" .. "\t" .. "syn3".. "\t" .. "conn" .. "\t" .. "fin1" .. "\t" .. "fin2" .. "\t" .. "fin3" .. "\t" .. "fin4" .. "\t" .. "totalstream" .."\n");
+				w:append("时间" .. "\t" .. "当前时间发生数据包/当前时间总包" .. "\t\t" ..  "conn列表示： 当前时间建立的会话/当前时间段总会话"  .."\n");
+				w:append("\t" .. "当前时间重复数据包/当前时间重复总包" .. "\t\t\t\t\t\t\t" .."\n");
+				w:append("\t" .. "当前时间总重复数据包/现存未响应数据包" ..  "conn列表示： -/当前时间点现存会话" .. "\t" .. "totalstream表示发生过的完整会话".."\n\n\n\n");
+				w:append("操作说明：" .."\n");
+				w:append("1，打开数据捕获器后启动本插件。在每一次统计后需关闭当前窗口（后期优化清零统计按钮）" .. "\n");
+				w:append("2, 如需重现统计可保存数据包，重新打开wireshark窗口再启动插件" .. "\n\n\n\n");
+				w:append("优化计划" .. "\n");
+				w:append("1,packagedetail按键下统计数据中ip和端口项。" .."\n");
+				w:append("2,clear按键清零统计项，使用数据包过滤器等重新过滤数据操作都需要清零。" .. "\n");
+				w:append("3,fin包后的ack暂未统计，实现统计" .. "\n");
+				w:append("4,探索wiresharklua接口，尝试操作过滤ip或端口实现。" .. "\n");
+				w:append("5,是否需要扩展终端命令实现批处理操作。" .. "\n");
+		end		
 		w:add_button("readme",readme)
-		w:add_button("reload", function() reload_lua_plugins() end)
 		w:add_button("statistics",statistics)
 		w:add_button("packagedetail",packagedetail_show)
-		--w:add_button("filter", filter)
-		--retap_packets()
+		retap_packets()
 	end
 	register_menu("statistic/syntime", statisticsyntime, MENU_TOOLS_UNSORTED)
 end
